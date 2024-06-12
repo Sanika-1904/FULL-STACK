@@ -13,21 +13,22 @@ const path=require("path")
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'))
 
+app.get('/',(req,res)=>{
+   res.send("HELLO");
+})
+
 app.get('/home', (req, res) => {
    res.render('home')
-   //res.send("hi this is home page")
 })
 
 app.get('/signup', (req, res) => {
    res.render('signup')
-   //res.send("hi this is home page")
 })
 
 app.get('/signin', (req, res) => {
    res.render('signin')
-   //res.send("hi this is home page")
 })
-//Register Route
+
 app.post('/signup',async(req, res) => {
 
    const emailexist =  await model_cons.findOne({ email: req.body.email})
@@ -90,8 +91,8 @@ app.post('/signin', async(req,res) => {
          return res.send("singed in ")
       } 
 })
-
-app.listen(3000, () => {
+const PORT=process.env.port||3000 ;
+app.listen(PORT, () => {
    console.log("my server is running on 3000 port")
 })
 
